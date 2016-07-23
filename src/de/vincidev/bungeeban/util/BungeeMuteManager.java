@@ -15,7 +15,7 @@ public class BungeeMuteManager {
     public static boolean ismuted(UUID uuid) {
         ResultSet rs = BungeeBan.getSQL().getResult("SELECT * FROM BungeeBan_Mutes WHERE UUID='" + uuid.toString() + "'");
         try {
-            if(rs.next()) {
+            if (rs.next()) {
                 return true;
             }
         } catch (SQLException e) {
@@ -30,10 +30,10 @@ public class BungeeMuteManager {
     }
 
     public static void mute(UUID uuid, long seconds, String MuteReason, String MutedBy) {
-        if(!ismuted(uuid)) {
+        if (!ismuted(uuid)) {
             long end = -1L;
-            if(seconds > 0) {
-                end = System.currentTimeMillis() + (seconds*1000);
+            if (seconds > 0) {
+                end = System.currentTimeMillis() + (seconds * 1000);
             }
             BungeeCord.getInstance().getPluginManager().callEvent(new BungeeMuteEvent(uuid, end, MuteReason, MutedBy));
             BungeeBan.getSQL().update("INSERT INTO BungeeBan_Mutes(UUID, MuteEnd, MuteReason, MutedBy) " +
@@ -45,7 +45,7 @@ public class BungeeMuteManager {
         long end = 0;
         ResultSet rs = BungeeBan.getSQL().getResult("SELECT * FROM BungeeBan_Mutes WHERE UUID='" + uuid.toString() + "'");
         try {
-            if(rs.next()) {
+            if (rs.next()) {
                 end = rs.getLong("MuteEnd");
             }
         } catch (SQLException e) {
@@ -58,7 +58,7 @@ public class BungeeMuteManager {
         String str = "";
         ResultSet rs = BungeeBan.getSQL().getResult("SELECT * FROM BungeeBan_Mutes WHERE UUID='" + uuid.toString() + "'");
         try {
-            if(rs.next()) {
+            if (rs.next()) {
                 str = rs.getString("MuteReason");
             }
         } catch (SQLException e) {
@@ -71,7 +71,7 @@ public class BungeeMuteManager {
         String str = "";
         ResultSet rs = BungeeBan.getSQL().getResult("SELECT * FROM BungeeBan_Mutes WHERE UUID='" + uuid.toString() + "'");
         try {
-            if(rs.next()) {
+            if (rs.next()) {
                 str = rs.getString("MutedBy");
             }
         } catch (SQLException e) {
@@ -81,27 +81,27 @@ public class BungeeMuteManager {
     }
 
     public static String getRemainingmuteTime(UUID uuid) {
-        if(ismuted(uuid)) {
+        if (ismuted(uuid)) {
             long end = getMuteEnd(uuid);
-            if(end > 0) {
-                long millis = end-System.currentTimeMillis();
+            if (end > 0) {
+                long millis = end - System.currentTimeMillis();
                 int days = 0;
                 int hours = 0;
                 int minutes = 0;
                 int seconds = 0;
-                while(millis >= 1000) {
+                while (millis >= 1000) {
                     seconds++;
                     millis -= 1000;
                 }
-                while(seconds >= 60) {
+                while (seconds >= 60) {
                     minutes++;
                     seconds -= 60;
                 }
-                while(minutes >= 60) {
+                while (minutes >= 60) {
                     hours++;
                     minutes -= 60;
                 }
-                while(hours >= 24) {
+                while (hours >= 24) {
                     days++;
                     hours -= 24;
                 }

@@ -21,20 +21,20 @@ public class TempbanCommand extends Command {
         BungeeCord.getInstance().getScheduler().runAsync(BungeeBan.getInstance(), new Runnable() {
             @Override
             public void run() {// /tempban user time timeunit reason
-                if(sender.hasPermission("BungeeBan.TempBan")) {
-                    if(args.length >= 4) {
+                if (sender.hasPermission("BungeeBan.TempBan")) {
+                    if (args.length >= 4) {
                         String playername = args[0];
                         String reason = "";
                         for (int i = 3; i <= args.length - 1; i++) {
                             reason = reason + args[i] + " ";
                         }
                         UUID uuid = PlayerUtil.getUniqueId(playername);
-                        if(uuid != null) {
-                            if(!BungeeBanManager.isBanned(uuid)) {
+                        if (uuid != null) {
+                            if (!BungeeBanManager.isBanned(uuid)) {
                                 try {
                                     long seconds = Integer.parseInt(args[1]);
                                     TimeUnit unit = TimeUnit.getByString(args[2]);
-                                    if(unit != null) {
+                                    if (unit != null) {
                                         seconds = seconds * unit.getSeconds();
                                         sender.sendMessage(BungeeBan.PREFIX + BungeeBan.getConfigManager().getString("lang.commands.tempban.banned", "{NAME}~" + playername));
                                         BungeeBanManager.ban(uuid, seconds, reason, sender.getName());

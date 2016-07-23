@@ -1,7 +1,6 @@
 package de.vincidev.bungeeban.commands;
 
 import de.vincidev.bungeeban.BungeeBan;
-import de.vincidev.bungeeban.util.BungeeBanManager;
 import de.vincidev.bungeeban.util.BungeeMuteManager;
 import de.vincidev.bungeeban.util.PlayerUtil;
 import net.md_5.bungee.BungeeCord;
@@ -21,12 +20,12 @@ public class UnmuteCommand extends Command {
         BungeeCord.getInstance().getScheduler().runAsync(BungeeBan.getInstance(), new Runnable() {
             @Override
             public void run() {
-                if(sender.hasPermission("BungeeBan.Unmute")) {
-                    if(args.length == 1) {
+                if (sender.hasPermission("BungeeBan.Unmute")) {
+                    if (args.length == 1) {
                         String playername = args[0];
                         UUID uuid = PlayerUtil.getUniqueId(playername);
-                        if(uuid != null) {
-                            if(BungeeMuteManager.ismuted(uuid)) {
+                        if (uuid != null) {
+                            if (BungeeMuteManager.ismuted(uuid)) {
                                 sender.sendMessage(BungeeBan.PREFIX + BungeeBan.getConfigManager().getString("lang.commands.unmute.unmuted", "{NAME}~" + playername));
                                 BungeeMuteManager.unmute(uuid, sender.getName());
                             } else {

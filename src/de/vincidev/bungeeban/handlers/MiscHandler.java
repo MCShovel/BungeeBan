@@ -33,11 +33,11 @@ public class MiscHandler implements Listener {
     @EventHandler
     public void onLogin(LoginEvent e) {
         UUID uuid = e.getConnection().getUniqueId();
-        if(BungeeBanManager.isBanned(uuid)) {
+        if (BungeeBanManager.isBanned(uuid)) {
             long end = BungeeBanManager.getBanEnd(uuid);
             long current = System.currentTimeMillis();
-            if(end > 0) {
-                if(end < current) {
+            if (end > 0) {
+                if (end < current) {
                     BungeeBanManager.unban(uuid, "automatic");
                 } else {
                     e.setCancelled(true);
@@ -54,24 +54,24 @@ public class MiscHandler implements Listener {
     public void onChat(ChatEvent e) {
         ProxiedPlayer p = ((ProxiedPlayer) e.getSender());
         String msg = e.getMessage();
-        if(BungeeMuteManager.ismuted(p.getUniqueId())) {
+        if (BungeeMuteManager.ismuted(p.getUniqueId())) {
             long end = BungeeMuteManager.getMuteEnd(p.getUniqueId());
             long current = System.currentTimeMillis();
-            if(end > 0) {
-                if(end > current) {
-                    if(msg.startsWith("/")) {
+            if (end > 0) {
+                if (end > current) {
+                    if (msg.startsWith("/")) {
                         List<String> blocked = BungeeBan.getConfigManager().getStringList("mute_deny_commands");
-                        for(String block : blocked) {
-                            if(msg.toLowerCase().startsWith(block.toLowerCase())) {
+                        for (String block : blocked) {
+                            if (msg.toLowerCase().startsWith(block.toLowerCase())) {
                                 e.setCancelled(true);
-                                for(String part : BungeeMuteManager.lines(p.getUniqueId())) {
+                                for (String part : BungeeMuteManager.lines(p.getUniqueId())) {
                                     p.sendMessage(BungeeBan.PREFIX + part);
                                 }
                                 return;
                             }
                         }
                     } else {
-                        for(String part : BungeeMuteManager.lines(p.getUniqueId())) {
+                        for (String part : BungeeMuteManager.lines(p.getUniqueId())) {
                             p.sendMessage(BungeeBan.PREFIX + part);
                         }
                         e.setCancelled(true);
@@ -80,19 +80,19 @@ public class MiscHandler implements Listener {
                     BungeeMuteManager.unmute(p.getUniqueId(), "automatic");
                 }
             } else {
-                if(msg.startsWith("/")) {
+                if (msg.startsWith("/")) {
                     List<String> blocked = BungeeBan.getConfigManager().getStringList("mute_deny_commands");
-                    for(String block : blocked) {
-                        if(msg.toLowerCase().startsWith(block.toLowerCase())) {
+                    for (String block : blocked) {
+                        if (msg.toLowerCase().startsWith(block.toLowerCase())) {
                             e.setCancelled(true);
-                            for(String part : BungeeMuteManager.lines(p.getUniqueId())) {
+                            for (String part : BungeeMuteManager.lines(p.getUniqueId())) {
                                 p.sendMessage(BungeeBan.PREFIX + part);
                             }
                             return;
                         }
                     }
                 } else {
-                    for(String part : BungeeMuteManager.lines(p.getUniqueId())) {
+                    for (String part : BungeeMuteManager.lines(p.getUniqueId())) {
                         p.sendMessage(BungeeBan.PREFIX + part);
                     }
                     e.setCancelled(true);

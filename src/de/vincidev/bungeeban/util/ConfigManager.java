@@ -21,11 +21,11 @@ public class ConfigManager {
             configuration = ConfigurationProvider.getProvider(YamlConfiguration.class).load(getFile());
             BungeeBan.PREFIX = getString("lang.prefix");
             BungeeBan.CONSOLE_PREFIX = getString("lang.console_prefix");
-            if(configuration.getString("api") == null) {
+            if (configuration.getString("api") == null) {
                 configuration.set("api", "eu");
                 save();
             }
-            if(configuration.getString("backend").equalsIgnoreCase("mysql")) {
+            if (configuration.getString("backend").equalsIgnoreCase("mysql")) {
                 BungeeBan.setSQL(new SQL(configuration.getString("mysql.host"),
                         configuration.getInt("mysql.port"),
                         configuration.getString("mysql.username"),
@@ -40,14 +40,14 @@ public class ConfigManager {
     }
 
     public String timeFormat(int days, int hours, int minutes, int seconds) {
-        return getString("lang.time_format").replace("{DAYS}", ""+days).replace("{HOURS}", ""+hours)
-                .replace("{MINUTES}", ""+minutes).replace("{SECONDS}", ""+seconds);
+        return getString("lang.time_format").replace("{DAYS}", "" + days).replace("{HOURS}", "" + hours)
+                .replace("{MINUTES}", "" + minutes).replace("{SECONDS}", "" + seconds);
     }
 
     public String getString(String key, String... replace) {
         String str = configuration.getString(key);
         str = ChatColor.translateAlternateColorCodes('&', str);
-        for(String repl : replace) {
+        for (String repl : replace) {
             String[] r = repl.split("~");
             str = str.replace(r[0], r[1]);
         }
@@ -63,8 +63,8 @@ public class ConfigManager {
     public List<String> getStringList(String key, String... replace) {
         List<String> list = getStringList(key);
         List<String> avail = new ArrayList<>();
-        for(String str : list) {
-            for(String repl : replace) {
+        for (String str : list) {
+            for (String repl : replace) {
                 String[] r = repl.split("~");
                 str = str.replace(r[0], r[1]);
             }
@@ -76,7 +76,7 @@ public class ConfigManager {
     public List<String> getStringList(String key) {
         List<String> list = configuration.getStringList(key);
         List<String> avail = new ArrayList<>();
-        for(String str : list) {
+        for (String str : list) {
             avail.add(ChatColor.translateAlternateColorCodes('&', str));
         }
         return avail;

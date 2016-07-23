@@ -35,9 +35,9 @@ public class SQL {
     }
 
     public void openConnection() {
-        if(!isConnected()) {
+        if (!isConnected()) {
             try {
-                if(!this.mysql) {
+                if (!this.mysql) {
                     Class.forName("org.sqlite.JDBC");
                     this.conn = DriverManager.getConnection("jdbc:sqlite:" + this.filename);
                 } else {
@@ -52,7 +52,7 @@ public class SQL {
     }
 
     public void closeConnection() {
-        if(isConnected()) {
+        if (isConnected()) {
             try {
                 this.conn.close();
                 this.conn = null;
@@ -63,7 +63,7 @@ public class SQL {
     }
 
     public void update(final String query) {
-        if(isConnected()) {
+        if (isConnected()) {
             try {
                 PreparedStatement pst = conn.prepareStatement(query);
                 pst.executeUpdate();
@@ -75,7 +75,7 @@ public class SQL {
     }
 
     public ResultSet getResult(String query) {
-        if(isConnected()) {
+        if (isConnected()) {
             try {
                 PreparedStatement pst = conn.prepareStatement(query);
                 return pst.executeQuery();
@@ -102,7 +102,7 @@ public class SQL {
         int amount = 0;
         ResultSet rs = getResult("SELECT COUNT(*) FROM " + tablename);
         try {
-            if(rs.next()) {
+            if (rs.next()) {
                 amount = rs.getInt(0);
             }
         } catch (SQLException e) {

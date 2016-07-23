@@ -20,16 +20,16 @@ public class MuteCommand extends Command {
         BungeeCord.getInstance().getScheduler().runAsync(BungeeBan.getInstance(), new Runnable() {
             @Override
             public void run() {
-                if(sender.hasPermission("bungeeban.Mute")) {
-                    if(args.length >= 2) {
+                if (sender.hasPermission("bungeeban.Mute")) {
+                    if (args.length >= 2) {
                         String playername = args[0];
                         String reason = "";
                         for (int i = 1; i <= args.length - 1; i++) {
                             reason = reason + args[i] + " ";
                         }
                         UUID uuid = PlayerUtil.getUniqueId(playername);
-                        if(uuid != null) {
-                            if(!BungeeMuteManager.ismuted(uuid)) {
+                        if (uuid != null) {
+                            if (!BungeeMuteManager.ismuted(uuid)) {
                                 sender.sendMessage(BungeeBan.PREFIX + BungeeBan.getConfigManager().getString("lang.commands.mute.muted", "{NAME}~" + playername));
                                 BungeeMuteManager.mute(uuid, -1, reason, sender.getName());
                             } else {

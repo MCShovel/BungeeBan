@@ -1,15 +1,12 @@
 package de.vincidev.bungeeban.commands;
 
 import de.vincidev.bungeeban.BungeeBan;
-import de.vincidev.bungeeban.util.BungeeBanManager;
-import de.vincidev.bungeeban.util.PlayerUtil;
 import net.md_5.bungee.BungeeCord;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Command;
 
 import java.util.List;
-import java.util.UUID;
 
 public class KickCommand extends Command {
 
@@ -22,20 +19,20 @@ public class KickCommand extends Command {
         BungeeCord.getInstance().getScheduler().runAsync(BungeeBan.getInstance(), new Runnable() {
             @Override
             public void run() {
-                if(sender.hasPermission("BungeeBan.Kick")) {
-                    if(args.length >= 2) {
+                if (sender.hasPermission("BungeeBan.Kick")) {
+                    if (args.length >= 2) {
                         String playername = args[0];
                         String reason = "";
                         for (int i = 1; i <= args.length - 1; i++) {
                             reason = reason + args[i] + " ";
                         }
                         ProxiedPlayer p = BungeeCord.getInstance().getPlayer(playername);
-                        if(p != null) {
+                        if (p != null) {
                             String kickmsg = "";
                             List<String> kickmsgs = BungeeBan.getConfigManager().getStringList("lang.kickedmessage",
-                                "{REASON}~" + reason,
-                                "{BY}~" + sender.getName());
-                            for(String part : kickmsgs) {
+                                    "{REASON}~" + reason,
+                                    "{BY}~" + sender.getName());
+                            for (String part : kickmsgs) {
                                 kickmsg = kickmsg + part + "\n";
                             }
                             p.disconnect(kickmsg);
@@ -44,9 +41,9 @@ public class KickCommand extends Command {
                                     "{REASON}~" + reason,
                                     "{BY}~" + sender.getName(),
                                     "{NAME}~" + p.getName());
-                            for(ProxiedPlayer o : BungeeCord.getInstance().getPlayers()) {
-                                if(o.hasPermission("BungeeBan.Broadcast.Ban")) {
-                                    for(String msg : messages) {
+                            for (ProxiedPlayer o : BungeeCord.getInstance().getPlayers()) {
+                                if (o.hasPermission("BungeeBan.Broadcast.Ban")) {
+                                    for (String msg : messages) {
                                         o.sendMessage(BungeeBan.PREFIX + msg);
                                     }
                                 }

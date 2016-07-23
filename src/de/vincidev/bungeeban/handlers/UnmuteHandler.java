@@ -10,16 +10,16 @@ import net.md_5.bungee.event.EventHandler;
 
 import java.util.List;
 
-public class UnmuteHandler implements Listener{
+public class UnmuteHandler implements Listener {
 
     @EventHandler
     public void onUnmute(BungeeUnmuteEvent e) {
         List<String> messages = BungeeBan.getConfigManager().getStringList("lang.commands.inmite.broadcast",
                 "{BY}~" + e.getUnmutedBy(),
                 "{NAME}~" + PlayerUtil.getPlayerName(e.getUnmuted()));
-        for(ProxiedPlayer p : BungeeCord.getInstance().getPlayers()) {
-            if(p.hasPermission("BungeeBan.Broadcast.Unmute")) {
-                for(String msg : messages) {
+        for (ProxiedPlayer p : BungeeCord.getInstance().getPlayers()) {
+            if (p.hasPermission("BungeeBan.Broadcast.Unmute")) {
+                for (String msg : messages) {
                     p.sendMessage(BungeeBan.PREFIX + msg);
                 }
             }

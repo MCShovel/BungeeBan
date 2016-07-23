@@ -20,9 +20,9 @@ public class MuteHandler implements Listener {
                 "{BY}~" + e.getmutedBy(),
                 "{NAME}~" + PlayerUtil.getPlayerName(e.getmuted()),
                 "{REMAININGTIME}~" + BungeeMuteManager.getRemainingmuteTime(e.getmuted()));
-        for(ProxiedPlayer p : BungeeCord.getInstance().getPlayers()) {
-            if(p.hasPermission("BungeeBan.Broadcast.Mute")) {
-                for(String msg : messages) {
+        for (ProxiedPlayer p : BungeeCord.getInstance().getPlayers()) {
+            if (p.hasPermission("BungeeBan.Broadcast.Mute")) {
+                for (String msg : messages) {
                     p.sendMessage(BungeeBan.PREFIX + msg);
                 }
             }

@@ -22,41 +22,41 @@ public class CheckCommand extends Command {
         BungeeCord.getInstance().getScheduler().runAsync(BungeeBan.getInstance(), new Runnable() {
             @Override
             public void run() {
-                if(sender.hasPermission("BungeeBan.Check")) {
-                    if(args.length == 1) {
+                if (sender.hasPermission("BungeeBan.Check")) {
+                    if (args.length == 1) {
                         UUID uuid = PlayerUtil.getUniqueId(args[0]);
-                        if(uuid != null) {
+                        if (uuid != null) {
                             String playername = PlayerUtil.getPlayerName(uuid);
                             sender.sendMessage(BungeeBan.PREFIX + BungeeBan.getConfigManager().getString("lang.commands.check.uuid", "{UUID}~" + uuid.toString()));
-                            if(BungeeBanManager.isBanned(uuid)) {
+                            if (BungeeBanManager.isBanned(uuid)) {
                                 List<String> msgs = BungeeBan.getConfigManager().getStringList("lang.commands.check.banned.positive",
                                         "{NAME}~" + playername,
                                         "{REASON}~" + BungeeBanManager.getBanReason(uuid),
                                         "{BY}~" + BungeeBanManager.getWhoBanned(uuid),
                                         "{REMAININGTIME}~" + BungeeBanManager.getRemainingBanTime(uuid));
-                                for(String msg : msgs) {
+                                for (String msg : msgs) {
                                     sender.sendMessage(BungeeBan.PREFIX + msg);
                                 }
                             } else {
                                 List<String> msgs = BungeeBan.getConfigManager().getStringList("lang.commands.check.banned.negative",
                                         "{NAME}~" + playername);
-                                for(String msg : msgs) {
+                                for (String msg : msgs) {
                                     sender.sendMessage(BungeeBan.PREFIX + msg);
                                 }
                             }
-                            if(BungeeMuteManager.ismuted(uuid)) {
+                            if (BungeeMuteManager.ismuted(uuid)) {
                                 List<String> msgs = BungeeBan.getConfigManager().getStringList("lang.commands.check.muted.positive",
                                         "{NAME}~" + playername,
                                         "{REASON}~" + BungeeMuteManager.getMuteReason(uuid),
                                         "{BY}~" + BungeeMuteManager.getWhomuted(uuid),
                                         "{REMAININGTIME}~" + BungeeMuteManager.getRemainingmuteTime(uuid));
-                                for(String msg : msgs) {
+                                for (String msg : msgs) {
                                     sender.sendMessage(BungeeBan.PREFIX + msg);
                                 }
                             } else {
                                 List<String> msgs = BungeeBan.getConfigManager().getStringList("lang.commands.check.muted.negative",
                                         "{NAME}~" + playername);
-                                for(String msg : msgs) {
+                                for (String msg : msgs) {
                                     sender.sendMessage(BungeeBan.PREFIX + msg);
                                 }
                             }

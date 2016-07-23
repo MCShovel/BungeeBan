@@ -1,7 +1,6 @@
 package de.vincidev.bungeeban.commands;
 
 import de.vincidev.bungeeban.BungeeBan;
-import de.vincidev.bungeeban.util.BungeeBanManager;
 import de.vincidev.bungeeban.util.BungeeMuteManager;
 import de.vincidev.bungeeban.util.PlayerUtil;
 import de.vincidev.bungeeban.util.TimeUnit;
@@ -22,20 +21,20 @@ public class TempmuteCommand extends Command {
         BungeeCord.getInstance().getScheduler().runAsync(BungeeBan.getInstance(), new Runnable() {
             @Override
             public void run() {
-                if(sender.hasPermission("BungeeBan.TempMute")) {
-                    if(args.length >= 4) {
+                if (sender.hasPermission("BungeeBan.TempMute")) {
+                    if (args.length >= 4) {
                         String playername = args[0];
                         String reason = "";
                         for (int i = 3; i <= args.length - 1; i++) {
                             reason = reason + args[i] + " ";
                         }
                         UUID uuid = PlayerUtil.getUniqueId(playername);
-                        if(uuid != null) {
-                            if(!BungeeMuteManager.ismuted(uuid)) {
+                        if (uuid != null) {
+                            if (!BungeeMuteManager.ismuted(uuid)) {
                                 try {
                                     long seconds = Integer.parseInt(args[1]);
                                     TimeUnit unit = TimeUnit.getByString(args[2]);
-                                    if(unit != null) {
+                                    if (unit != null) {
                                         seconds = seconds * unit.getSeconds();
                                         sender.sendMessage(BungeeBan.PREFIX + BungeeBan.getConfigManager().getString("lang.commands.tempmute.muted", "{NAME}~" + playername));
                                         BungeeMuteManager.mute(uuid, seconds, reason, sender.getName());

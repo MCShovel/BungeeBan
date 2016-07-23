@@ -20,16 +20,16 @@ public class BanCommand extends Command {
         BungeeCord.getInstance().getScheduler().runAsync(BungeeBan.getInstance(), new Runnable() {
             @Override
             public void run() {
-                if(sender.hasPermission("BungeeBan.Ban")) {
-                    if(args.length >= 2) {
+                if (sender.hasPermission("BungeeBan.Ban")) {
+                    if (args.length >= 2) {
                         String playername = args[0];
                         String reason = "";
                         for (int i = 1; i <= args.length - 1; i++) {
                             reason = reason + args[i] + " ";
                         }
                         UUID uuid = PlayerUtil.getUniqueId(playername);
-                        if(uuid != null) {
-                            if(!BungeeBanManager.isBanned(uuid)) {
+                        if (uuid != null) {
+                            if (!BungeeBanManager.isBanned(uuid)) {
                                 sender.sendMessage(BungeeBan.PREFIX + BungeeBan.getConfigManager().getString("lang.commands.ban.banned", "{NAME}~" + playername));
                                 BungeeBanManager.ban(uuid, -1, reason, sender.getName());
                             } else {
