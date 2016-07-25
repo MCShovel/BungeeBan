@@ -60,16 +60,11 @@ public class BungeeBan extends Plugin {
         PluginManager pm = BungeeCord.getInstance().getPluginManager();
         pm.registerListener(this, new BanHandler());
         pm.registerListener(this, new UnbanHandler());
-        pm.registerListener(this, new MuteHandler());
-        pm.registerListener(this, new UnmuteHandler());
         pm.registerListener(this, new MiscHandler());
         pm.registerCommand(this, new BanCommand("ban"));
         pm.registerCommand(this, new KickCommand("kick"));
-        pm.registerCommand(this, new MuteCommand("mute"));
         pm.registerCommand(this, new TempbanCommand("tempban"));
-        pm.registerCommand(this, new TempmuteCommand("tempmute"));
         pm.registerCommand(this, new UnbanCommand("unban"));
-        pm.registerCommand(this, new UnmuteCommand("unmute"));
         pm.registerCommand(this, new CheckCommand("check"));
     }
 

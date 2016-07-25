@@ -99,25 +99,6 @@ lang:
       unbanned: '&aYou have successfully unbanned &e{NAME}&a.'
       broadcast:
       - '&e{NAME} &chas been unbanned by &e{BY}&c.'
-    mute:
-      syntax: '&3Usage: &e/mute <Player> <Reason>'
-      muted: '&aYou have successfully muted &e{NAME}&a.'
-      broadcast:
-      - '&e{NAME} &chas been muted by &e{BY}&c.'
-      - '&cReason: &e{REASON}'
-      - '&cTime: &e{REMAININGTIME}'
-    tempmute:
-      syntax: '&3Usage: &e/tempmute <Player> <Time> <TimeUnit> <Reason>'
-      muted: '&aYou have successfully muted &e{NAME}&a.'
-      broadcast:
-      - '&e{NAME} &chas been muted by &e{BY}&c.'
-      - '&cReason: &e{REASON}'
-      - '&cTime: &e{REMAININGTIME}'
-    unmute:
-      syntax: '&3Usage: &e/unmute <Player>'
-      unmuted: '&aYou have successfully unmuted &e{NAME}&a.'
-      broadcast:
-      - '&e{NAME} &chas been unmuted by &e{BY}&c.'
     kick:
       syntax: '&3Usage: &e/kick <Player> <Reason>'
       kicked: '&aYou have successfully kicked &e{NAME}&a.'

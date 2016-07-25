@@ -2,7 +2,6 @@ package de.vincidev.bungeeban.commands;
 
 import de.vincidev.bungeeban.BungeeBan;
 import de.vincidev.bungeeban.util.BungeeBanManager;
-import de.vincidev.bungeeban.util.BungeeMuteManager;
 import de.vincidev.bungeeban.util.PlayerUtil;
 import net.md_5.bungee.BungeeCord;
 import net.md_5.bungee.api.CommandSender;
@@ -39,22 +38,6 @@ public class CheckCommand extends Command {
                                 }
                             } else {
                                 List<String> msgs = BungeeBan.getConfigManager().getStringList("lang.commands.check.banned.negative",
-                                        "{NAME}~" + playername);
-                                for (String msg : msgs) {
-                                    sender.sendMessage(BungeeBan.PREFIX + msg);
-                                }
-                            }
-                            if (BungeeMuteManager.ismuted(uuid)) {
-                                List<String> msgs = BungeeBan.getConfigManager().getStringList("lang.commands.check.muted.positive",
-                                        "{NAME}~" + playername,
-                                        "{REASON}~" + BungeeMuteManager.getMuteReason(uuid),
-                                        "{BY}~" + BungeeMuteManager.getWhomuted(uuid),
-                                        "{REMAININGTIME}~" + BungeeMuteManager.getRemainingmuteTime(uuid));
-                                for (String msg : msgs) {
-                                    sender.sendMessage(BungeeBan.PREFIX + msg);
-                                }
-                            } else {
-                                List<String> msgs = BungeeBan.getConfigManager().getStringList("lang.commands.check.muted.negative",
                                         "{NAME}~" + playername);
                                 for (String msg : msgs) {
                                     sender.sendMessage(BungeeBan.PREFIX + msg);

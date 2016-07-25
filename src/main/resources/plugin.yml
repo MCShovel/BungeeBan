@@ -8,8 +8,5 @@ commands:
   ban:
   unban:
   tempban:
-  mute:
-  unmute:
-  tempmute:
   kick:
   check:
