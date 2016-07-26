@@ -10,3 +10,4 @@ commands:
   tempban:
   kick:
   check:
+  whitelist:

@@ -61,6 +61,7 @@ lang:
     player_already_muted: '&cThe player &e{NAME} &cis already muted.'
     player_not_muted: '&cThe player &e{NAME} &cis not muted.'
     unknown_timeunit: '&cUnknown timunit. <sec|min|h|days>'
+    whitelisted: '&cThe server is temporarily whitelisted for maintenance.'
 
   banmessage:
   - '&cYou have been banned from the server!'
@@ -80,6 +81,8 @@ lang:
   - '&cKicked By: &e{BY}'
 
   commands:
+    whitelist:
+      syntax: '&3Usage: &e/whitelist on|off'
     ban:
       syntax: '&3Usage: &e/ban <Player> <Reason>'
       banned: '&aYou have successfully banned &e{NAME}&a.'

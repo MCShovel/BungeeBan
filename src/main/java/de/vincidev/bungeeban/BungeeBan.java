@@ -15,6 +15,7 @@ public class BungeeBan extends Plugin {
     private static BungeeBan instance;
     private static SQL sql;
     private static ConfigManager configManager;
+    private MiscHandler joinHandler;
 
     public static BungeeBan getInstance() {
         return instance;
@@ -49,6 +50,8 @@ public class BungeeBan extends Plugin {
         } else {
             log("An internal error occured whilst connecting to SQL.");
         }
+        
+        joinHandler.setWhitelisted(joinHandler.isWhitelisted());
     }
 
     @Override
@@ -58,14 +61,17 @@ public class BungeeBan extends Plugin {
 
     public void register() {
         PluginManager pm = BungeeCord.getInstance().getPluginManager();
+        
+        joinHandler = new MiscHandler(this.getConfigManager().getFile().getParentFile());
         pm.registerListener(this, new BanHandler());
         pm.registerListener(this, new UnbanHandler());
-        pm.registerListener(this, new MiscHandler());
+        pm.registerListener(this, joinHandler);
         pm.registerCommand(this, new BanCommand("ban"));
         pm.registerCommand(this, new KickCommand("kick"));
         pm.registerCommand(this, new TempbanCommand("tempban"));
         pm.registerCommand(this, new UnbanCommand("unban"));
         pm.registerCommand(this, new CheckCommand("check"));
+        pm.registerCommand(this, new WhitelistCommand("whitelist", joinHandler));
     }
 
     public void log(String str) {
