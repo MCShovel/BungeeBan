@@ -42,8 +42,7 @@ public class BungeeBan extends Plugin {
         sql.openConnection();
         if (sql.isConnected()) {
             log("SQL successfully connected. Now creating tables.");
-            sql.createTableIfNotExists("BungeeBan_Bans", "UUID VARCHAR(100), BanEnd LONG, BanReason VARCHAR(256), BannedBy VARCHAR(100)");
-            sql.createTableIfNotExists("BungeeBan_Mutes", "UUID VARCHAR(100), MuteEnd LONG, MuteReason VARCHAR(256), MutedBy VARCHAR(100)");
+            sql.createTableIfNotExists("BungeeBan_Bans", "UUID VARCHAR(40), BanEnd BIGINT, BanReason VARCHAR(256), BannedBy VARCHAR(45)");
             register();
             log("Tables successfully created.");
             log("Loading complete!");
