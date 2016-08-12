@@ -24,7 +24,7 @@
             <artifactId>bungeecord</artifactId>
             <version>1.9-SNAPSHOT</version>
             <scope>system</scope>
-            <systemPath>/opt/msm/src/bungeecord/bootstrap/target/BungeeCord.jar</systemPath>
+            <systemPath>${basedir}/../bungeecord/bootstrap/target/BungeeCord.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>org.json</groupId>
