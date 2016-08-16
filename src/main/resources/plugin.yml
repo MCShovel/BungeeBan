@@ -6,8 +6,14 @@ website: https://github.com/vincidev/BungeeBan
 main: de.vincidev.bungeeban.BungeeBan
 commands:
   ban:
+    permission: BungeeBan.Ban
   unban:
+    permission: BungeeBan.Unban
   tempban:
+    permission: BungeeBan.TempBan
   kick:
+    permission: BungeeBan.Kick
   check:
+    permission: BungeeBan.Check
   whitelist:
+    permission: BungeeBan.Whitelist.Admin
