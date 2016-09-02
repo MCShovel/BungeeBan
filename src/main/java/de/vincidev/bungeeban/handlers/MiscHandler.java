@@ -8,7 +8,6 @@ import net.md_5.bungee.api.config.ListenerInfo;
 import net.md_5.bungee.api.connection.PendingConnection;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.event.LoginEvent;
-import net.md_5.bungee.api.event.TabCompleteEvent;
 import net.md_5.bungee.api.plugin.Listener;
 import net.md_5.bungee.event.EventHandler;
 
@@ -91,20 +90,6 @@ public class MiscHandler implements Listener {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-    }
-    
-	@EventHandler
-    public void onTabComplete(TabCompleteEvent ev) {
-        String partialPlayerName = ev.getCursor().toLowerCase();
-        int lastSpaceIndex = partialPlayerName.lastIndexOf(' ');
-        if (lastSpaceIndex >= 0) {
-            partialPlayerName = partialPlayerName.substring(lastSpaceIndex + 1);
-        }
-        for (ProxiedPlayer p : BungeeCord.getInstance().getPlayers()) {
-            if (p.getName().toLowerCase().startsWith(partialPlayerName)) {
-                ev.getSuggestions().add(p.getName());
-            }
-        }
     }
 
     @EventHandler
