@@ -40,8 +40,27 @@ public class ConfigManager {
     }
 
     public String timeFormat(int days, int hours, int minutes, int seconds) {
-        return getString("lang.time_format").replace("{DAYS}", "" + days).replace("{HOURS}", "" + hours)
-                .replace("{MINUTES}", "" + minutes).replace("{SECONDS}", "" + seconds);
+    	StringBuilder sb = new StringBuilder();
+    	if (days > 0) {
+    		sb.append(days);
+    		sb.append(" day" + (days > 1 ? "s" : ""));
+    	}
+    	if (hours > 0) {
+    		if (sb.length() > 0) sb.append(", ");
+    		sb.append(hours);
+    		sb.append(" hour" + (hours > 1 ? "s" : ""));
+    	}
+    	if (minutes > 0) {
+    		if (sb.length() > 0) sb.append(", ");
+    		sb.append(minutes);
+    		sb.append(" minute" + (minutes > 1 ? "s" : ""));
+    	}
+    	if (seconds > 0 && (minutes == 0 && hours == 0 && days == 0)) {
+    		if (sb.length() > 0) sb.append(", ");
+    		sb.append(seconds);
+    		sb.append(" second" + (seconds > 1 ? "s" : ""));
+    	}
+        return sb.toString();
     }
 
     public String getString(String key, String... replace) {

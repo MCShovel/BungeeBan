@@ -21,7 +21,7 @@ public class BanHandler implements Listener {
                 "{NAME}~" + PlayerUtil.getPlayerName(e.getBanned()),
                 "{REMAININGTIME}~" + BungeeBanManager.getRemainingBanTime(e.getBanned()));
         for (ProxiedPlayer p : BungeeCord.getInstance().getPlayers()) {
-            if (p.hasPermission("BungeeBan.Broadcast.Ban")) {
+            if (p.hasPermission("BungeeBan.Broadcast")) {
                 for (String msg : messages) {
                     p.sendMessage(BungeeBan.PREFIX + msg);
                 }

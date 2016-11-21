@@ -42,7 +42,7 @@ public class KickCommand extends Command {
                                     "{BY}~" + sender.getName(),
                                     "{NAME}~" + p.getName());
                             for (ProxiedPlayer o : BungeeCord.getInstance().getPlayers()) {
-                                if (o.hasPermission("BungeeBan.Broadcast.Ban")) {
+                                if (o.hasPermission("BungeeBan.Broadcast")) {
                                     for (String msg : messages) {
                                         o.sendMessage(BungeeBan.PREFIX + msg);
                                     }

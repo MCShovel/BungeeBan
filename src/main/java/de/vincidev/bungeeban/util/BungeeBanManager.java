@@ -37,7 +37,7 @@ public class BungeeBanManager {
                 end = System.currentTimeMillis() + (seconds * 1000);
             }
             BungeeBan.getSQL().update("INSERT INTO BungeeBan_Bans(UUID, BanEnd, BanReason, BannedBy) " +
-                    "VALUES('" + uuid.toString() + "', '" + end + "', '" + banReason + "', '" + bannedBy + "')");
+                    "VALUES('" + uuid.toString() + "', '" + end + "', '" + banReason.replace("'", "''") + "', '" + bannedBy + "')");
             ProxiedPlayer target = BungeeCord.getInstance().getPlayer(uuid);
             if (target != null) {
                 target.disconnect(getBanKickMessage(uuid));
@@ -89,27 +89,14 @@ public class BungeeBanManager {
         if (isBanned(uuid)) {
             long end = getBanEnd(uuid);
             if (end > 0) {
-                long millis = end - System.currentTimeMillis();
-                int days = 0;
-                int hours = 0;
-                int minutes = 0;
-                int seconds = 0;
-                while (millis >= 1000) {
-                    seconds++;
-                    millis -= 1000;
-                }
-                while (seconds >= 60) {
-                    minutes++;
-                    seconds -= 60;
-                }
-                while (minutes >= 60) {
-                    hours++;
-                    minutes -= 60;
-                }
-                while (hours >= 24) {
-                    days++;
-                    hours -= 24;
-                }
+                long remain = (end + 999) - System.currentTimeMillis();
+                int days = (int)(remain / (24 * 60 * 60 * 1000));
+                remain %= (24 * 60 * 60 * 1000);
+                int hours = (int)(remain / (60 * 60 * 1000));
+			    remain %= (60 * 60 * 1000);
+                int minutes = (int)(remain / (60 * 1000));
+				remain %= (60 * 1000);
+                int seconds = (int)Math.round(remain / 1000.0);
                 return BungeeBan.getConfigManager().timeFormat(days, hours, minutes, seconds);
             } else {
                 return BungeeBan.getConfigManager().getString("lang.time_format_permanent");
